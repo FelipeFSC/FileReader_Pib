@@ -37,15 +37,54 @@ public class lab1 {
 /*      Abertura de arquivo e loop de leitura */
 /*      ------------------------------------- */
         try {
-            FileReader fileReader = new FileReader(nomeDoArquivo1);
-
+            FileReader fileReader = new FileReader(nomeDoArquivo1);            
             BufferedReader bufferedReader = new BufferedReader(fileReader);
+            
+            /* Calculando o Pib Total */
+            double total = 0;
+            
+            /* Valores necessarios */
+            String cidadesComPib[] = new String[27];
+            String nomeCidades[] = new String[27];
+            double pibCidades[] = new double[27];
+            
+            int contador = 0;
+            
+            /* loop para cada linha do arquivo */
+            while( (linha = bufferedReader.readLine()) != null ){
+                // Separando em vetor os valores de tras da virgula e da frente.
+                String[] dados = linha.split(";");
+                System.out.println(linha);
+                
+                /* Pegando os valores do arquivo */
+                pibCidades[contador] = Double.parseDouble(dados[1]);
+                nomeCidades[contador] = dados[0];
+                cidadesComPib[contador] = linha;
+                
+                /* Calculando o total */
+                total = total + pibCidades[contador];
+                
+                contador++;
+            }
+            System.out.println("------------------------------");
+            System.out.println("Total: "+ (total) );
+            
+            System.out.println("");
+            System.out.println("Tudo ----------");
+            for( int i=0; i < nomeCidades.length; i++ ){
+                System.out.println( nomeCidades[i] );
+                System.out.println( pibCidades[i] );
+                System.out.println( cidadesComPib[i] );
+            }
 
+            
+            /*
             // loop por cada linha do arquivo
             while((linha = bufferedReader.readLine()) != null) {
                 System.out.println(linha);
             }   
-
+            */
+            
             // feche o arquivo
             bufferedReader.close();         
         }

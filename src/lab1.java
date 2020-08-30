@@ -66,24 +66,13 @@ public class lab1 {
                 
                 contador++;
             }
+            
             System.out.println("------------------------------");
-            System.out.println("Total: "+ (total) );
-            
-            System.out.println("");
-            System.out.println("Tudo ----------");
-            for( int i=0; i < nomeCidades.length; i++ ){
-                System.out.println( nomeCidades[i] );
-                System.out.println( pibCidades[i] );
-                System.out.println( cidadesComPib[i] );
+            System.out.println("Percentual de cada cidade");
+            System.out.println("------------------------------");
+            for( int i = 0; i < pibCidades.length; i++ ){
+                System.out.printf("%s: %.2f%s\n",nomeCidades[i],((pibCidades[i]*100)/total),"%");
             }
-
-            
-            /*
-            // loop por cada linha do arquivo
-            while((linha = bufferedReader.readLine()) != null) {
-                System.out.println(linha);
-            }   
-            */
             
             // feche o arquivo
             bufferedReader.close();         

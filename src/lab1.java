@@ -84,10 +84,10 @@ public class lab1 {
             System.out.println("Erro lendo o arquivo '" + nomeDoArquivo1 + "'");                  
         }
 
-        System.out.println("");
-        System.out.println("-----------------");
+        System.out.println("------------------------------");
         System.out.println("");
         
+        /* Responsavel por guardar os totais das regiões */
         double regioes[] = new double[5];
         
 /*      ------------------------------------- */
@@ -97,6 +97,7 @@ public class lab1 {
             FileReader fileReader = new FileReader(nomeDoArquivo2);            
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             
+            /* Responsavel por trocar a regial */
             int contRegial = 0;
             
             // Tirando o "Norte" da busca 
@@ -104,22 +105,22 @@ public class lab1 {
             
             /* loop para cada linha do arquivo */
             while( (linha = bufferedReader.readLine()) != null ){
-                System.out.println(linha);
+                //System.out.println(linha);
                 
-                /* Tirando o nome da região da busca */
+                /* Trocando a regial que vai ser somada */
                 if( linha.equals("") ){
                     linha = bufferedReader.readLine();
                     contRegial++;
                 }
                 
-                /* Separando as regiões e somando o pib */
+                /* Somando o pib das cidades */
                 for (int i = 0; i < nomeCidades.length; i++) {
                     if( nomeCidades[i].equals(linha) ){
-                        System.out.println("-----------------> "+pibCidades[i]);
+                        //System.out.println("-----------------> "+pibCidades[i]);
                         regioes[contRegial] = regioes[contRegial] + pibCidades[i];
                     } 
                 }
-                System.out.println("Total "+ regioes[contRegial]);
+                //System.out.println("Total "+ regioes[contRegial]);
             }
             
             // feche o arquivo
@@ -133,7 +134,7 @@ public class lab1 {
         }
         
 /*      ------------------------------------- */
-/*      Exemplo de escrita em arquivo         */
+/*      Escrita em arquivo                    */
 /*      ------------------------------------- */
         String arquivoDeSaida = "saida.txt";
 
@@ -143,9 +144,15 @@ public class lab1 {
 
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-            bufferedWriter.write("pib da regiao X = $$$$");
+            bufferedWriter.write("pib da regiao Norte = "+regioes[0]);
             bufferedWriter.newLine();
-            bufferedWriter.write("pib da regiao Y = $$$$");
+            bufferedWriter.write("pib da regiao Nordeste = "+regioes[1]);
+            bufferedWriter.newLine();
+            bufferedWriter.write("pib da regiao Sudeste = "+regioes[2]);
+            bufferedWriter.newLine();
+            bufferedWriter.write("pib da regiao Sul = "+regioes[3]);
+            bufferedWriter.newLine();
+            bufferedWriter.write("pib da regiao Centro-Oeste = "+regioes[4]);
 
             // feche o arquivo
             bufferedWriter.close();

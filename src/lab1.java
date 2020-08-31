@@ -19,7 +19,7 @@ e executaros seguintes itens:
 a-) Imprimir na tela a lista de PIB por estado em percentual em relação ao total.
 
 b-) Gerar um arquivo de saída (saida.txt) sumarizando (somando) o PIB 
-porregiões. Será fornecida uma lista de estados por regiões que deve ser lida 
+por regiões. Será fornecida uma lista de estados por regiões que deve ser lida 
 doarquivo regioes.txt
 */
 
@@ -28,10 +28,16 @@ public class lab1 {
 
         // nome do arquivo
         String nomeDoArquivo1 = "pib.txt";
-//      String nomeDoArquivo2 = "regioes.txt";
+        String nomeDoArquivo2 = "regioes.txt";
 
         // linha temporariaa
         String linha = null;
+        
+        /* Valores necessarios */
+        String cidadesComPib[] = new String[27];
+        String nomeCidades[] = new String[27];
+        double pibCidades[] = new double[27];
+        
         
 /*      ------------------------------------- */
 /*      Abertura de arquivo e loop de leitura */
@@ -42,19 +48,13 @@ public class lab1 {
             
             /* Calculando o Pib Total */
             double total = 0;
-            
-            /* Valores necessarios */
-            String cidadesComPib[] = new String[27];
-            String nomeCidades[] = new String[27];
-            double pibCidades[] = new double[27];
-            
             int contador = 0;
             
             /* loop para cada linha do arquivo */
             while( (linha = bufferedReader.readLine()) != null ){
                 // Separando em vetor os valores de tras da virgula e da frente.
                 String[] dados = linha.split(";");
-                System.out.println(linha);
+                //System.out.println(linha);
                 
                 /* Pegando os valores do arquivo */
                 pibCidades[contador] = Double.parseDouble(dados[1]);
@@ -83,7 +83,54 @@ public class lab1 {
         catch(IOException ex) {
             System.out.println("Erro lendo o arquivo '" + nomeDoArquivo1 + "'");                  
         }
+
+        System.out.println("");
+        System.out.println("-----------------");
+        System.out.println("");
         
+        double regioes[] = new double[5];
+        
+/*      ------------------------------------- */
+/*      Abertura de arquivo e loop de leitura */
+/*      ------------------------------------- */
+        try {
+            FileReader fileReader = new FileReader(nomeDoArquivo2);            
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            
+            int contRegial = 0;
+            
+            // Tirando o "Norte" da busca 
+            linha = bufferedReader.readLine();
+            
+            /* loop para cada linha do arquivo */
+            while( (linha = bufferedReader.readLine()) != null ){
+                System.out.println(linha);
+                
+                /* Tirando o nome da região da busca */
+                if( linha.equals("") ){
+                    linha = bufferedReader.readLine();
+                    contRegial++;
+                }
+                
+                /* Separando as regiões e somando o pib */
+                for (int i = 0; i < nomeCidades.length; i++) {
+                    if( nomeCidades[i].equals(linha) ){
+                        System.out.println("-----------------> "+pibCidades[i]);
+                        regioes[contRegial] = regioes[contRegial] + pibCidades[i];
+                    } 
+                }
+                System.out.println("Total "+ regioes[contRegial]);
+            }
+            
+            // feche o arquivo
+            bufferedReader.close();         
+        }
+        catch(FileNotFoundException ex) {
+            System.out.println("Arquivo inexistente: '" + nomeDoArquivo1 + "'");                
+        }
+        catch(IOException ex) {
+            System.out.println("Erro lendo o arquivo '" + nomeDoArquivo1 + "'");                  
+        }
         
 /*      ------------------------------------- */
 /*      Exemplo de escrita em arquivo         */
@@ -108,4 +155,12 @@ public class lab1 {
         }    
 
     }
+    
+    public static double pesquisaCidade( String cidade ){
+        
+        
+        
+        return 0;
+    }
+     
 }
